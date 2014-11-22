@@ -1,7 +1,6 @@
 package com.primeraev2014.examen.examenprimeraev2014;
 
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 
 import java.util.ArrayList;
 
@@ -10,10 +9,19 @@ class Modulos {
    String nombreModulo;
    int nota;
 
-    Modulos(){}
-    Modulos(String nombreModulo, int nota) {
+    public Modulos(){}
+    
+    public Modulos(String nombreModulo, int nota) {
         this.nombreModulo = nombreModulo;
         this.nota = nota;
+    }
+
+    public String getNombreModulo() {
+        return nombreModulo;
+    }
+
+    public String getNota() {
+        return String.valueOf(nota);
     }
 
     @Override

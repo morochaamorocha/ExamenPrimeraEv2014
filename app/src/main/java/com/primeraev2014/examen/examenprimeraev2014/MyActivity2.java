@@ -1,6 +1,5 @@
 package com.primeraev2014.examen.examenprimeraev2014;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -9,7 +8,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Message;
 import android.util.Xml;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -17,8 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,8 +27,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.logging.Handler;
 
 
 public class MyActivity2 extends Activity {
@@ -86,6 +80,8 @@ public class MyActivity2 extends Activity {
 
                 return true;
             case R.id.item_menu_salir:
+                Intent intent = new Intent(getApplicationContext(), MyActivity.class);
+                startActivity(intent);
                 finish();
                 return true;
             case R.id.item_men_horarios:
@@ -107,6 +103,14 @@ public class MyActivity2 extends Activity {
 
                 return true;
             case android.R.id.home:
+                try {
+                    LeerXml("alumnossegur.xml");
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (XmlPullParserException e) {
+                    e.printStackTrace();
+                }
+                escribirXML("alumnos.xml");
                 finish();
                 return true;
             default:
@@ -131,7 +135,7 @@ public class MyActivity2 extends Activity {
             int evento = parser.getEventType();
 
 
-            while (evento!=XmlPullParser.END_DOCUMENT)
+            while (evento != XmlPullParser.END_DOCUMENT)
             {
                 switch (evento) {
                     case XmlPullParser.START_TAG:
@@ -173,6 +177,58 @@ public class MyActivity2 extends Activity {
         catch (IOException e) { e.printStackTrace(); }
     }
 
+    void escribirXML(String url){
+
+        FileOutputStream fileOutputStream = null;
+        XmlSerializer serializer =Xml.newSerializer();
+
+
+            try {
+                fileOutputStream = openFileOutput(url, MODE_PRIVATE);
+                serializer.setOutput(fileOutputStream, "UTF-8");
+                serializer.startDocument(null, true);
+                serializer.setFeature("http://xmlpull.org./v1/doc/features.html#ident-output", true);
+
+                //Tag grupo
+                serializer.startTag(null, "grupo");
+
+                for (Datos x : alumnos) {
+                    //Tag alumno
+                    serializer.startTag(null, "alumno");
+
+                    //Tag nombre
+                    serializer.startTag(null, "nombre");
+                    serializer.text(x.getNombre());
+                    serializer.endTag(null, "nombre");
+
+                    //Tag notas
+                    serializer.startTag(null, "notas");
+
+                    for (Modulos m : x.notasModulo) {
+
+                        //Tag modulo
+                        serializer.startTag(null, "modulo");
+                        serializer.attribute(null, "nota", m.getNota());
+                        serializer.text(m.getNombreModulo());
+                        serializer.endTag(null, "modulo");
+                    }
+
+                    serializer.endTag(null, "notas");
+                    serializer.endTag(null, "alumno");
+                }
+
+                serializer.endTag(null, "grupo");
+                serializer.endDocument();
+                serializer.flush();
+                fileOutputStream.close();
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+    }
     private void mostrarToast(){
 
         Toast mToast = new Toast(getApplicationContext());
