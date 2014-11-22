@@ -34,6 +34,7 @@ public class MyActivity2 extends Activity {
     static ArrayList<Datos> alumnos;
     static ArrayList<Bitmap> datos;
 
+    FragmentLista fragmentLista;
 
 
     @Override
@@ -58,6 +59,7 @@ public class MyActivity2 extends Activity {
             e.printStackTrace();
         }
 
+        fragmentLista = new FragmentLista();
     }
 
     static  void crearArrayImagenes() {
@@ -88,7 +90,7 @@ public class MyActivity2 extends Activity {
                 Toast.makeText(getApplicationContext(), "Esta opción aun no ha sido implementada.", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.item_menu_alumnos:
-                añadirFragmenLista();
+                añadirFragmenLista(fragmentLista);
                 return true;
             case R.id.item_submenu1_asc:
 
@@ -97,9 +99,11 @@ public class MyActivity2 extends Activity {
 
                 return true;
             case R.id.item_submenu2_asc:
+                fragmentLista.ordenarAsc();
 
                 return true;
             case R.id.item_submenu2_desc:
+                fragmentLista.ordenarDesc();
 
                 return true;
             case android.R.id.home:
@@ -229,6 +233,7 @@ public class MyActivity2 extends Activity {
             }
 
     }
+
     private void mostrarToast(){
 
         Toast mToast = new Toast(getApplicationContext());
@@ -246,11 +251,10 @@ public class MyActivity2 extends Activity {
     }
 
 
-    private void añadirFragmenLista(){
+    private void añadirFragmenLista(FragmentLista fragmentLista){
 
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        FragmentLista fragmentLista = new FragmentLista();
         transaction.add(R.id.contenedor2, fragmentLista);
         transaction.commit();
     }

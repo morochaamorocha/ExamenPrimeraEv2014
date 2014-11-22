@@ -16,6 +16,8 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -75,6 +77,16 @@ public class FragmentLista extends Fragment implements AdapterView.OnItemClickLi
         transaction.commit();
     }
 
+    public void ordenarAsc(){
+        Collections.sort(MyActivity2.datos, new Sorter(-1));
+        adapter.notifyDataSetChanged();
+    }
+
+    public void ordenarDesc(){
+        Collections.sort(MyActivity2.datos, new Sorter(1));
+        adapter.notifyDataSetChanged();
+    }
+
     class  MyArrayAdapter extends  ArrayAdapter
     {
         View vista;
@@ -95,5 +107,20 @@ public class FragmentLista extends Fragment implements AdapterView.OnItemClickLi
         }
     }
 
+    static class Sorter implements Comparator<Object> {
+        int order=-1;
+        Sorter(int order){
+            this.order=order;
+        }
+
+        public int compare(Object ob1,Object ob2){
+            if(ob1.toString().compareTo(ob2.toString())==0) return 0;
+            else if(ob1.toString().compareTo(ob2.toString())<0)
+                return order;
+            else
+                return(-1*order);
+        }
+
+    }
 
 }
