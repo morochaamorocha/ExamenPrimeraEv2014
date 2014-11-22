@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/item_menu_guardar"
+        android:title="@string/guardar"
+        android:icon="@drawable/save_contact"
+        android:showAsAction="always"
+        android:orderInCategory="1"/>
+
+    <item android:id="@+id/item_menu_salir"
+        android:title="@string/salir"
+        android:icon="@drawable/cancel_contact"
+        android:showAsAction="always"
+        android:orderInCategory="2"/>
+
+    <item android:id="@+id/item_men_horarios"
+        android:title="@string/horarios"
+        android:orderInCategory="3">
+        <menu>
+
+            <item android:id="@+id/item_submenu1_asc"
+                android:title="@string/asc"/>
+
+            <item android:id="@+id/item_submenu1_desc"
+                android:title="@string/desc"/>
+
+        </menu>
+        </item>
+
+    <item android:id="@+id/item_menu_alumnos"
+        android:title="@string/alumnos"
+        android:orderInCategory="4">
+        <menu>
+
+            <item android:id="@+id/item_submenu2_asc"
+                android:title="@string/asc"/>
+
+            <item android:id="@+id/item_submenu2_desc"
+                android:title="@string/desc"/>
+
+        </menu>
+        </item>
+
+
+</menu>

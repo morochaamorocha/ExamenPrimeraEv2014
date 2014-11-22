@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MyActivity"
+    android:background="#ffb2fcff">
+
+    <LinearLayout
+        android:id="@+id/contenedor1"
+        android:layout_width="fill_parent"
+
+        android:orientation="vertical"
+        android:layout_height="250dp"/>
+    <LinearLayout
+        android:id="@+id/contenedor2"
+        android:layout_width="fill_parent"
+
+        android:orientation="vertical"
+        android:layout_height="800dp" >
+
+    </LinearLayout>
+
+
+</LinearLayout>
