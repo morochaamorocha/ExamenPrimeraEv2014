@@ -92,12 +92,6 @@ public class MyActivity2 extends Activity {
             case R.id.item_menu_alumnos:
                 añadirFragmenLista(fragmentLista);
                 return true;
-            case R.id.item_submenu1_asc:
-
-                return true;
-            case R.id.item_submenu1_desc:
-
-                return true;
             case R.id.item_submenu2_asc:
                 fragmentLista.ordenarAsc();
 
