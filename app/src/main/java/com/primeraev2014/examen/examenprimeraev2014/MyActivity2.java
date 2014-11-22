@@ -77,7 +77,7 @@ public class MyActivity2 extends Activity {
 
         switch (item.getItemId()){
             case R.id.item_menu_guardar:
-
+                escribirXML("alumnos.xml");
                 return true;
             case R.id.item_menu_salir:
                 Intent intent = new Intent(getApplicationContext(), MyActivity.class);
@@ -180,7 +180,7 @@ public class MyActivity2 extends Activity {
     void escribirXML(String url){
 
         FileOutputStream fileOutputStream = null;
-        XmlSerializer serializer =Xml.newSerializer();
+        XmlSerializer serializer = Xml.newSerializer();
 
 
             try {
